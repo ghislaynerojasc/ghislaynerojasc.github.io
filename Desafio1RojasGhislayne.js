@@ -14,17 +14,26 @@ while(nombre==""){
 //Elegir combo a comprar:
 let comboElegido = parseInt(prompt(`Que combo deseas comprar ${nombre}`));
 //Validacion de que el combo sea un numero y este en el rango de los combos ofrecidos
-while((comboElegido > 0 && comboElegido>4) || (isNaN(comboElegido))){
-    comboElegido = parseInt(prompt(`No es un combo del menu!!--> Ingrese nuevamente el combo que desea comprar ${nombre}`))
+function validacionComboCantyNumero(combo,limite) {
+    while((combo === 0) || (combo<0) || (combo>1 && combo>limite) || (isNaN(combo))){
+        if(limite==limiteCombos){combo = parseInt(prompt(`No es un combo del menu!!--> 
+        Ingrese nuevamente el combo que desea comprar ${nombre}`))}
+        else{combo = parseInt(prompt(`No es un dato válido!!--> 
+        Ingrese nuevamente la cantidad que desea comprar ${nombre}`))}
+    }
+    return combo;
 }
+
+let limiteCombos=4;
+comboElegido=validacionComboCantyNumero(comboElegido,limiteCombos)
+
+
 
 //Indica la cantidad del pedido:
 let cantcomboElegido = parseInt(prompt(`Que cantidad del combo ${comboElegido} quieres comprar ${nombre} ?`));
 //Validacion de que la cantidad a ordenar sea un numero
-while(isNaN(cantcomboElegido)){
-    console.log("No es dato válido");
-    comboElegido = parseInt(prompt(`Revise el tipo de dato: Ingrese que cantidad del combo ${comboElegido} quieres comprar ${nombre} ?`))
-}
+let limiteCantidad=1000;
+cantcomboElegido=validacionComboCantyNumero(cantcomboElegido,limiteCantidad)
 
 let bandera = true
 do{
@@ -62,19 +71,14 @@ do{
             while(pregunta.toUpperCase() === "Y"){
                 let comboAdicional = parseInt(prompt(`Que combo deseas añadir ${nombre}`));
                 //Validacion de que el combo adicional sea un numero y este en el rango de los combos ofrecidos
-                while((comboAdicional > 0 && comboAdicional>4) || (isNaN(comboAdicional))){
-                    comboAdicional = parseInt(prompt(`No es un combo del menu!!--> Ingrese nuevamente el combo que desea añadir ${nombre}`))
-                }
-                let cantcomboAdicional = parseInt(prompt(`Que cantidad del combo ${comboAdicional} quieres añadir ${nombre} ?`));
+                comboAdicional=validacionComboCantyNumero(comboAdicional,limiteCombos)
+                let cantComboAdicional = parseInt(prompt(`Que cantidad del combo ${comboAdicional} quieres añadir ${nombre} ?`));
                 //Validacion de que la cantidad adicional a añadir sea un numero
-                while(isNaN(cantcomboAdicional)){ 
-                    console.log("No es dato válido");
-                    comboElegido = parseInt(prompt(`Revise el tipo de dato: Ingrese que cantidad del combo ${comboAdicional} quieres añadir ${nombre} ?`))
-                }
+                cantComboAdicional=validacionComboCantyNumero(cantComboAdicional,limiteCantidad)
                 //Cálculo de monto a pagar del pedido total
-                totalAdicional=montoAPagar(comboAdicional,cantcomboAdicional) +subtotalAdicional;
+                totalAdicional=montoAPagar(comboAdicional,cantComboAdicional) +subtotalAdicional;
                 subtotalAdicional=totalAdicional;
-                console.log(`${nombre}: Añadiste ${cantcomboAdicional} del combo ${comboAdicional} `);
+                console.log(`${nombre}: Añadiste ${cantComboAdicional} del combo ${comboAdicional} `);
                 //Pregunta si se añade un combo a su pedido
                 pregunta = prompt(`Desea agregar un combo a su pedido? ("Y/N")`);
                 if(pregunta.toUpperCase() === "N"){
