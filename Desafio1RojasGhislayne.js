@@ -13,7 +13,7 @@ while(nombre==""){
 }
 //Elegir combo a comprar:
 let comboElegido = parseInt(prompt(`Que combo deseas comprar ${nombre}`));
-//Validacion de que el combo sea un numero y este en el rango de los combos ofrecidos
+//Funcion de Validacion de que el combo y cantidades sean numeros y esten en el rango ofrecido
 function validacionComboCantyNumero(combo,limite) {
     while((combo === 0) || (combo<0) || (combo>1 && combo>limite) || (isNaN(combo))){
         if(limite==limiteCombos){combo = parseInt(prompt(`No es un combo del menu!!--> 
@@ -25,14 +25,13 @@ function validacionComboCantyNumero(combo,limite) {
 }
 
 let limiteCombos=4;
+//Uso funcion Validacion de que la cantidad a ordenar sea un numero
 comboElegido=validacionComboCantyNumero(comboElegido,limiteCombos)
-
-
-
 //Indica la cantidad del pedido:
 let cantcomboElegido = parseInt(prompt(`Que cantidad del combo ${comboElegido} quieres comprar ${nombre} ?`));
-//Validacion de que la cantidad a ordenar sea un numero
+
 let limiteCantidad=1000;
+//Uso funcion Validacion de que la cantidad a ordenar sea un numero
 cantcomboElegido=validacionComboCantyNumero(cantcomboElegido,limiteCantidad)
 
 let bandera = true
@@ -70,10 +69,10 @@ do{
             let subtotalAdicional=total;
             while(pregunta.toUpperCase() === "Y"){
                 let comboAdicional = parseInt(prompt(`Que combo deseas añadir ${nombre}`));
-                //Validacion de que el combo adicional sea un numero y este en el rango de los combos ofrecidos
+                //Uso funcion Validacion de que el combo adicional sea un numero y este en el rango de los combos ofrecidos
                 comboAdicional=validacionComboCantyNumero(comboAdicional,limiteCombos)
                 let cantComboAdicional = parseInt(prompt(`Que cantidad del combo ${comboAdicional} quieres añadir ${nombre} ?`));
-                //Validacion de que la cantidad adicional a añadir sea un numero
+                //Uso funcion Validacion de que la cantidad adicional a añadir sea un numero y este en rango
                 cantComboAdicional=validacionComboCantyNumero(cantComboAdicional,limiteCantidad)
                 //Cálculo de monto a pagar del pedido total
                 totalAdicional=montoAPagar(comboAdicional,cantComboAdicional) +subtotalAdicional;
